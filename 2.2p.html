@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Concepts Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color:pink ;
+    }
+    #app {
+      background-color: rgb(241, 93, 117);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    p {
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.11/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>BASIC CONCEPTS OF VUE 3</h1>
+
+    <input v-model="inputText" placeholder="Type something...">
+
+    <div v-if="inputText">
+      <p>You typed: {{ inputText }}</p>
+    </div>
+
+    <div v-else>
+      <p>Start typing to see the result.</p>
+    </div>
+
+    <p v-show="inputText">This will show/hide based on input.</p>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          inputText: ''
+        };
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>

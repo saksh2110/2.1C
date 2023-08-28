@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saksham's Todo App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .app {
+      width: 80%;
+      padding: 20px;
+      border: 1px solid black;
+      background-color: pink;
+      border-radius: 10px;
+    }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid grey;
+      background-color: beige;
+      border-radius: 4px;
+    }
+    .todo-item input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    .delete-button {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+      .app {
+        padding: 50px;
+      }
+      .todo-item {
+        padding: 8px;
+        font-size: 14px;
+      }
+      .delete-button {
+        padding: 4px 8px;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.19/dist/vue.global.min.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <h1>My Todo App</h1>
+    <input v-model="newTodo" @keyup.enter="addTodo" placeholder="Add a new task" class="todo-input">
+    
+    <ul>
+      <li v-for="(todo, index) in todos" :key="index" class="todo-item">
+        <label>
+          <input type="checkbox" v-model="todo.completed">
+          {{ todo.text }}
+        </label>
+        <button @click="deleteTodo(index)" class="delete-button">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          newTodo: '',
+          todos: []
+        };
+      },
+      methods: {
+        addTodo() {
+          if (this.newTodo.trim() !== '') {
+            this.todos.push({ text: this.newTodo, completed: false });
+            this.newTodo = '';
+          }
+        },
+        deleteTodo(index) {
+          this.todos.splice(index, 1);
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
